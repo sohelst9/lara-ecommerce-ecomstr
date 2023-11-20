@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-md-6 col-12" data-aos="fade-right" data-aos-duration="1200">
-                        <a class="banner-item position-relative rounded" href="collection-left-sidebar.html">
+                        <a class="banner-item position-relative rounded">
                             <img class="banner-img" src="{{ asset('frontend/assets/img/banner/shoe-1.jpg') }}"
                                 alt="banner-1">
                             <div class="content-absolute content-slide">
@@ -43,7 +43,7 @@
                         </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12" data-aos="fade-left" data-aos-duration="1200">
-                        <a class="banner-item position-relative rounded" href="collection-left-sidebar.html">
+                        <a class="banner-item position-relative rounded">
                             <img class="banner-img" src="{{ asset('frontend/assets/img/banner/shoe-2.jpg') }}"
                                 alt="banner-2">
                             <div class="content-absolute content-slide">
@@ -95,7 +95,8 @@
                         @foreach ($common_categories as $category)
                             <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
                                 <div class="instagram-card">
-                                    <a class="instagram-img-wrapper" href="index-shoe.html">
+                                    <a class="instagram-img-wrapper" href="{{ route('category.product.show', $category->slug) }}">
+                                        <span>{{ $category->title }}</span>
                                         <img src="{{ asset($category->image) }}" alt="{{ $category->title }}"
                                             class="instagram-card-img rounded" title="{{ $category->title }}">
                                     </a>
@@ -168,43 +169,43 @@
                     <div class="scroll-horizontal row align-items-center flex-nowrap">
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
                             data-aos-duration="700">
-                            <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
+                            <a href="#" class="brand-logo d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('frontend/assets/img/brand/1.png') }}" alt="img">
                             </a>
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
                             data-aos-duration="700">
-                            <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
+                            <a href="#" class="brand-logo d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('frontend/assets/img/brand/1.png') }}" alt="img">
                             </a>
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
                             data-aos-duration="700">
-                            <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
+                            <a href="#" class="brand-logo d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('frontend/assets/img/brand/1.png') }}" alt="img">
                             </a>
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
                             data-aos-duration="700">
-                            <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
+                            <a href="#" class="brand-logo d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('frontend/assets/img/brand/1.png') }}" alt="img">
                             </a>
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
                             data-aos-duration="700">
-                            <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
+                            <a href="#" class="brand-logo d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('frontend/assets/img/brand/1.png') }}" alt="img">
                             </a>
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
                             data-aos-duration="700">
-                            <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
+                            <a href="#" class="brand-logo d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('frontend/assets/img/brand/1.png') }}" alt="img">
                             </a>
                         </div>
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6" data-aos="fade-up"
                             data-aos-duration="700">
-                            <a href="index-shoe.html" class="brand-logo d-flex align-items-center justify-content-center">
+                            <a href="#" class="brand-logo d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('frontend/assets/img/brand/1.png') }}" alt="img">
                             </a>
                         </div>

@@ -68,7 +68,7 @@
                                 <div class="col-lg-3 col-md-4 col-6" data-aos="fade-up" data-aos-duration="700">
                                     <div class="product-card">
                                         <div class="product-card-img">
-                                            <a class="hover-switch" href="#">
+                                            <a class="hover-switch" href="{{ route('single.product', $product->slug) }}">
                                                 <img class="secondary-img" src="{{ asset($product->thumbnail) }}"
                                                     alt="{{ $product->name }}">
                                                 <img class="primary-img" src="{{ asset($product->thumbnail) }}"
@@ -101,14 +101,17 @@
                                             </div>
                                         </div>
                                         <div class="product-card-details">
+                                            <ul class="color-lists list-unstyled d-flex align-items-center">
+                                                category : {{ $product->Category->title }}
+                                            </ul>
                                             <h3 class="product-card-title">
-                                                <a href="#">{{ $product->name }}</a>
+                                                <a href="{{ route('single.product', $product->slug) }}">{{ $product->name }}</a>
                                             </h3>
                                             <div class="product-card-price">
-                                                <span class="card-price-regular">{{ $product->price }}</span>
+                                                <span class="card-price-regular {{ $product->discount ? 'text-decoration-line-through' : '' }}">&#2547; {{ $product->price }}</span>
                                                 @if ($product->discount)
                                                     <span
-                                                        class="card-price-compare text-decoration-line-through">{{ $product->discount_price }}</span>
+                                                        class="card-price-compare">&#2547; {{ $product->discount_price }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -119,7 +122,7 @@
                     </div>
                     <div class="pagination justify-content-center mt-2">
                         <nav>
-                           {{ $category_products->links('frontend.inc.custom_paginate') }}
+                            {{ $category_products->links('frontend.inc.custom_paginate') }}
                         </nav>
                     </div>
                 </div>

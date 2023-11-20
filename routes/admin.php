@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ColorController;
 use App\Http\Controllers\Backend\CustomerController;
@@ -38,6 +39,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
     Route::resource('/staff', StaffController::class);
     Route::resource('/role', RoleController::class);
     Route::resource('/permission', PermissionController::class);
+    Route::resource('/banner', BannerController::class);
     //---resource route //---mixed product related route end-------
      //----customer routes-----
      Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');

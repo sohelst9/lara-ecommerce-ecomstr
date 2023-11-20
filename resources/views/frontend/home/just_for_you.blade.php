@@ -31,7 +31,7 @@
                         <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
                             <div class="product-card">
                                 <div class="product-card-img">
-                                    <a class="hover-switch" href="#">
+                                    <a class="hover-switch" href="{{ route('single.product', $justforyou_product->slug) }}">
                                         <img class="secondary-img" src="{{ asset($justforyou_product->thumbnail) }}"
                                             alt="{{ $justforyou_product->name }}">
                                         <img class="primary-img" src="{{ asset($justforyou_product->thumbnail) }}"
@@ -58,13 +58,13 @@
                                 </div>
                                 <div class="product-card-details">
                                     <h3 class="product-card-title">
-                                        <a href="#">{{ $justforyou_product->name }}</a>
+                                        <a href="{{ route('single.product', $justforyou_product->slug) }}">{{ $justforyou_product->name }}</a>
                                     </h3>
                                     <div class="product-card-price">
-                                        <span class="card-price-regular">{{ $justforyou_product->price }}</span>
+                                        <span class="card-price-regular {{ $justforyou_product->discount ? 'text-decoration-line-through' : '' }}">&#2547; {{ $justforyou_product->price }}</span>
                                         @if ($justforyou_product->discount)
                                             <span
-                                                class="card-price-compare text-decoration-line-through">{{ $justforyou_product->discount_price }}</span>
+                                                class="card-price-compare">&#2547; {{ $justforyou_product->discount_price }}</span>
                                         @endif
                                     </div>
                                 </div>

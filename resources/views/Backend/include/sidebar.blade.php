@@ -62,5 +62,21 @@
                 </ul>
             </div>
         </li>
+
+        <!---Frontend--->
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-Frontend" aria-expanded="false"
+                aria-controls="ui-Frontend">
+                <i class="ti-palette menu-icon"></i>
+                <span class="menu-title">Frontend</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-Frontend">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('banner.index') }}">Banner</a></li>
+                </ul>
+            </div>
+        </li>
+
     </ul>
 </nav>

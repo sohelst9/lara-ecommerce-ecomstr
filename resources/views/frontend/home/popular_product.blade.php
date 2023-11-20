@@ -10,7 +10,7 @@
                     <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
                         <div class="product-card">
                             <div class="product-card-img">
-                                <a class="hover-switch" href="#">
+                                <a class="hover-switch" href="{{ route('single.product', $popular_product->slug) }}">
                                     <img class="secondary-img" src="{{ asset($popular_product->thumbnail) }}"
                                         alt="{{ $popular_product->name }}">
                                     <img class="primary-img" src="{{ asset($popular_product->thumbnail) }}"
@@ -37,12 +37,12 @@
                             </div>
                             <div class="product-card-details">
                                 <h3 class="product-card-title">
-                                    <a href="#">{{ $popular_product->name }}</a>
+                                    <a href="{{ route('single.product', $popular_product->slug) }}">{{ $popular_product->name }}</a>
                                 </h3>
                                 <div class="product-card-price">
-                                    <span class="card-price-regular">{{ $popular_product->price }}</span>
+                                    <span class="card-price-regular {{ $popular_product->discount ? 'text-decoration-line-through' : '' }}">&#2547; {{ $popular_product->price }}</span>
                                     @if ($popular_product->discount)
-                                        <span class="card-price-compare text-decoration-line-through">{{ $popular_product->discount_price }}</span>
+                                        <span class="card-price-compare">&#2547; {{ $popular_product->discount_price }}</span>
                                     @endif
                                 </div>
                             </div>
