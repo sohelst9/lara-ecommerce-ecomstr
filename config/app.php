@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\CategoryShowServiceProvider;
+use App\Providers\UserCartServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -170,6 +171,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         CategoryShowServiceProvider::class,
+        UserCartServiceProvider::class,
     ])->toArray(),
 
     /*

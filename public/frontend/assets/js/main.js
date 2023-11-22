@@ -1,3 +1,10 @@
+
+$(document).ready(function() {
+  $("#profileImage").click(function() {
+    $("#profileDropdown").toggle();
+  });
+});
+
 (function ($) {
   'use strict';
 

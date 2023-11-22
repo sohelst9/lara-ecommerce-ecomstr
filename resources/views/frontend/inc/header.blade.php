@@ -13,10 +13,14 @@
             <div class="col-lg-3 d-lg-block d-none">
                 <div class="announcement-meta-wrapper d-flex align-items-center justify-content-end">
                     <div class="announcement-meta d-flex align-items-center">
-                        <a class="announcement-login announcement-text text-white" href="">
-                            <i class="fa-solid fa-user-tie text-warning"></i>
-                            <span>Login</span>
-                        </a>
+                        @auth('web')
+                        @else
+                            <a class="announcement-login announcement-text text-white" href="{{ route('login') }}">
+                                <i class="fa-solid fa-user-tie text-warning"></i>
+                                <span>Login</span>
+                            </a>
+                        @endauth
+
                         <span class="separator-login d-flex px-3">
                             <svg width="2" height="9" viewBox="0 0 2 9" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -118,6 +122,7 @@
                 </div>
                 <div class="col-lg-3 col-md-8 col-8">
                     <div class="header-action d-flex align-items-center justify-content-end">
+                        <!---- search icon---->
                         <a class="header-action-item header-search" href="javascript:void(0)">
                             <svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -126,7 +131,9 @@
                                     fill="black" />
                             </svg>
                         </a>
-                        <a class="header-action-item header-wishlist ms-4 d-none d-lg-block" href="{{ route('wishlist.index') }}">
+                        <!---- wishlist icon---->
+                        <a class="header-action-item header-wishlist ms-4 d-none d-lg-block"
+                            href="{{ route('wishlist.index') }}">
                             <svg class="icon icon-wishlist" width="26" height="22" viewBox="0 0 26 22"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -134,15 +141,40 @@
                                     fill="black" />
                             </svg>
                         </a>
-                        <a class="header-action-item header-cart ms-4" href="#drawer-cart"
-                            data-bs-toggle="offcanvas">
-                            <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z"
-                                    fill="black" />
-                            </svg>
-                        </a>
+                        <!---- cart icon---->
+                        @auth('web')
+                            <a class="header-action-item header-cart ms-4" href="#drawer-cart"
+                                data-bs-toggle="offcanvas">
+                                <svg class="icon icon-cart" width="24" height="26" viewBox="0 0 24 26"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 0.000183105C9.25391 0.000183105 7 2.25409 7 5.00018V6.00018H2.0625L2 6.93768L1 24.9377L0.9375 26.0002H23.0625L23 24.9377L22 6.93768L21.9375 6.00018H17V5.00018C17 2.25409 14.7461 0.000183105 12 0.000183105ZM12 2.00018C13.6562 2.00018 15 3.34393 15 5.00018V6.00018H9V5.00018C9 3.34393 10.3438 2.00018 12 2.00018ZM3.9375 8.00018H7V11.0002H9V8.00018H15V11.0002H17V8.00018H20.0625L20.9375 24.0002H3.0625L3.9375 8.00018Z"
+                                        fill="black" />
+                                </svg>
+                            </a>
+                        @endauth
+
+
+                        @auth('web')
+                            <!---- profile icon---->
+                            <div class="dropdown-img">
+                                <img src="{{ asset('image/default-image.webp') }}" alt="Image" class="img-fluid"
+                                    id="profileImage">
+                                <div class="dropdown-content" id="profileDropdown">
+                                    <a href="{{ route('customer.dashboard') }}">My Account</a>
+                                    <a href="#">My Orders</a>
+                                    <a href="#">Update Profile</a>
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <a href="#"
+                                            onclick="event.preventDefault();
+                                        this.closest('form').submit();">Sign
+                                            Out</a>
+                                    </form>
+                                </div>
+                            </div>
+                        @endauth
+                        <!---- mobile menu bar icon---->
                         <a class="header-action-item header-hamburger ms-4 d-lg-none" href="#drawer-menu"
                             data-bs-toggle="offcanvas">
                             <svg class="icon icon-hamburger" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -160,7 +192,8 @@
         <!---search bar--->
         <div class="search-wrapper">
             <div class="container">
-                <form action="{{ route('search.product') }}" class="search-form d-flex align-items-center" method="GET">
+                <form action="{{ route('search.product') }}" class="search-form d-flex align-items-center"
+                    method="GET">
                     <button type="submit" class="search-submit bg-transparent pl-0 text-start">
                         <svg class="icon icon-search" width="20" height="20" viewBox="0 0 20 20"
                             fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -353,7 +353,7 @@
                         $('#size_id').html(data);
                         $('#stock_quantity').html('');
                         $('#error_msg').html('');
-                        $('.qty-input').val('');
+                        $('.qty-input').val('0');
                     }
                 });
             });
@@ -374,7 +374,7 @@
                         success: function(data) {
                             $('#stock_quantity').html(data);
                             $('#error_msg').html('');
-                            $('.qty-input').val('');
+                            $('.qty-input').val('0');
                         }
                     });
                 } else {

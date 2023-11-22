@@ -13,7 +13,9 @@ class CartController extends Controller
     //--index
     public function index()
     {
-        return view('frontend.product.cart');
+        $discount = 0;
+        $carts = Cart::where('user_id', auth()->user()->id)->get();
+        return view('frontend.product.cart', compact('carts', 'discount'));
     }
     //--store
     public function store(Request $request)
