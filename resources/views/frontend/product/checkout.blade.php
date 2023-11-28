@@ -68,7 +68,8 @@
         <div class="checkout-page mt-100">
             <div class="container">
                 <div class="checkout-page-wrapper">
-                    <form action="">
+                    <form action="{{ route('order') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-xl-9 col-lg-8 col-md-12 col-12">
                                 <div class="section-header mb-3">
@@ -82,16 +83,17 @@
                                             <img src="{{ asset('image/default-image.webp') }}" alt="img">
                                         @endif
                                     </div>
-                                    <div class="checkout-user-details d-flex align-items-center justify-content-between w-100">
+                                    <div
+                                        class="checkout-user-details d-flex align-items-center justify-content-between w-100">
                                         <div class="checkout-user-info">
                                             <h2 class="checkout-user-name">{{ auth()->user()->name }}</h2>
                                             <p class="checkout-user-address mb-0">{{ auth()->user()->phone }}</p>
                                         </div>
-    
+
                                         {{-- <a href="#" class="edit-user btn-secondary">EDIT PROFILE</a> --}}
                                     </div>
                                 </div>
-    
+
                                 <div class="shipping-address-area">
                                     <h2 class="shipping-address-heading pb-1">Shipping & Billing address</h2>
                                     <div class="shipping-address-form-wrapper">
@@ -99,46 +101,75 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <fieldset>
-                                                        <label for="name" class="label">Your Name <span class="text-danger">(*)</span></label>
+                                                        <label for="name" class="label">Your Name <span
+                                                                class="text-danger">(*)</span></label>
                                                         <input type="text" name="name" id="name"
                                                             value="{{ auth()->user()->name }}" />
+                                                        @error('name')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
-    
+
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <fieldset>
-                                                        <label for="email" class="label">Email address <span class="text-danger">(*)</span></label>
+                                                        <label for="email" class="label">Email address <span
+                                                                class="text-danger">(*)</span></label>
                                                         <input type="email" name="email" id="email"
                                                             value="{{ old('email') }}" />
+                                                        @error('email')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <fieldset>
-                                                        <label for="phone" class="label">Phone number <span class="text-danger">(*)</span></label>
+                                                        <label for="phone" class="label">Phone number <span
+                                                                class="text-danger">(*)</span></label>
                                                         <input type="text" name="phone" id="phone"
                                                             value="{{ auth()->user()->phone }}" />
+                                                        @error('phone')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <fieldset>
-                                                        <label for="division" class="label">Division <span class="text-danger">(*)</span></label>
+                                                        <label for="division" class="label">Division <span
+                                                                class="text-danger">(*)</span></label>
                                                         <select class="form-select" name="division" id="division">
-                                                            <option selected="ca">Canada</option>
+                                                            <option value="">select division</option>
+                                                            @foreach ($divisions as $division)
+                                                                <option value="{{ $division->id }}">{{ $division->name }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
+                                                        @error('division')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <fieldset>
-                                                        <label for="district" class="label">District <span class="text-danger">(*)</span></label>
+                                                        <label for="district" class="label">District <span
+                                                                class="text-danger">(*)</span></label>
                                                         <select class="form-select" name="district" id="district">
                                                         </select>
+                                                        @error('district')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <fieldset>
-                                                        <label for="sub_district" class="label">Sub District <span class="text-danger">(*)</span></label>
-                                                        <select class="form-select" name="district" id="district">
+                                                        <label for="sub_district" class="label">Sub District <span
+                                                                class="text-danger">(*)</span></label>
+                                                        <select class="form-select" name="sub_district"
+                                                            id="sub_district">
                                                         </select>
+                                                        @error('sub_district')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
@@ -146,13 +177,20 @@
                                                         <label for="zip_code" class="label">Zip code</label>
                                                         <input type="text" name="zip_code" id="zip_code"
                                                             value="{{ old('zip_code') }}" />
+                                                        @error('zip_code')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
                                                     <fieldset>
-                                                        <label for="address" class="label">Address <span class="text-danger">(*)</span></label>
+                                                        <label for="address" class="label">Address <span
+                                                                class="text-danger">(*)</span></label>
                                                         <input type="text" name="address" id="address"
                                                             value="{{ old('address') }}">
+                                                        @error('address')
+                                                            <p class="text-danger">{{ $message }}</p>
+                                                        @enderror
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12 col-12">
@@ -163,7 +201,7 @@
                                                     </fieldset>
                                                 </div>
                                             </div>
-    
+
                                         </div>
                                     </div>
                                 </div>
@@ -171,7 +209,7 @@
                             <div class="col-xl-3 col-lg-4 col-md-12 col-12">
                                 <div class="cart-total-area checkout-summary-area">
                                     <h3 class="d-none d-lg-block mb-0 text-center heading_24 mb-4">Order summary</h4>
-    
+
                                         @foreach ($carts as $cart)
                                             <div class="minicart-item d-flex">
                                                 <div class="mini-img-wrapper">
@@ -181,7 +219,8 @@
                                                 <div class="product-info">
                                                     <h2 class="product-title"><a>{{ $cart->product?->name }}</a>
                                                     </h2>
-                                                    <p class="product-vendor">&#2547; {{ $cart->Product?->discount_price }} x
+                                                    <p class="product-vendor">&#2547;
+                                                        {{ $cart->Product?->discount_price }} x
                                                         {{ $cart->quantity }}</p>
                                                     <p>{{ $cart->Size?->name }} /
                                                         {{ $cart->Color?->name }}</p>
@@ -191,13 +230,15 @@
                                         <div class="cart-total-box mt-4 bg-transparent p-0">
                                             <div class="subtotal-item subtotal-box">
                                                 <h4 class="subtotal-title">Subtotals:</h4>
+                                                <input type="hidden" name="subTotal" value="{{ session('subtotal') }}">
                                                 <p class="subtotal-value">&#2547;{{ session('subtotal') }}</p>
                                             </div>
                                             <div class="subtotal-item discount-box">
                                                 <h4 class="subtotal-title">Discount:</h4>
+                                                <input type="hidden" name="discount" value="{{ session('discount') }}">
                                                 <p class="subtotal-value">{{ session('discount') }} %</p>
                                             </div>
-    
+
                                             <div class="mt-3">
                                                 <h6 class="">Delivery Charge :</h4>
                                                     <div class="radio-group">
@@ -208,7 +249,7 @@
                                                                 Inside dhaka - &#2547; 70
                                                             </label>
                                                         </div>
-    
+
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio"
                                                                 name="delevery_charge" id="outside_dhaka" value="130">
@@ -217,48 +258,54 @@
                                                             </label>
                                                         </div>
                                                     </div>
+                                                    @error('delevery_charge')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
                                             </div>
                                             <hr />
                                             <div class="subtotal-item discount-box">
                                                 <h4 class="subtotal-title">Total:</h4>
-                                                <input type="hidden" id="total"
-                                                    name="total"value="{{ session('total') }}">
+                                                <input type="hidden" id="total" name="total"
+                                                    value="{{ session('total') }}">
                                                 <p class="subtotal-value">&#2547;<span
                                                         id="grand_total">{{ session('total') }}</p>
                                             </div>
                                         </div>
-    
+
                                         <div class="payment-options">
                                             <h6>Select payment Method :</h6>
                                             <label>
-                                                <input type="radio" name="payment" value="stripe">
+                                                <input type="radio" name="payment_type" value="stripe">
                                                 <img src="{{ asset('frontend/assets/img/payment/stripe.png') }}"
                                                     alt="Stripe">
                                             </label>
-    
+
                                             <label>
-                                                <input type="radio" name="payment" value="bkash">
+                                                <input type="radio" name="payment_type" value="bkash">
                                                 <img src="{{ asset('frontend/assets/img/payment/bikash.png') }}"
                                                     alt="bKash">
                                             </label>
-    
+
                                             <label>
-                                                <input type="radio" name="payment" value="nagad">
+                                                <input type="radio" name="payment_type" value="nagad">
                                                 <img src="{{ asset('frontend/assets/img/payment/nagad.png') }}"
                                                     alt="Nagad">
                                             </label>
-    
+
                                             <label>
-                                                <input type="radio" name="payment" value="paypal">
+                                                <input type="radio" name="payment_type" value="paypal">
                                                 <img src="{{ asset('frontend/assets/img/payment/paypal.png') }}"
                                                     alt="PayPal">
                                             </label>
-    
+
                                             <label>
-                                                <input type="radio" name="payment" value="cash-on-delivery">
+                                                <input type="radio" name="payment_type" value="cash_on_delivery">
                                                 <img src="{{ asset('frontend/assets/img/payment/cash_one_delevery.png') }}"
                                                     alt="Cash on Delivery">
                                             </label>
+                                            @error('payment_type')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                 </div>
                             </div>
@@ -280,6 +327,38 @@
 @endsection
 @section('front_script')
     <script>
+        $('#division').change(function() {
+            var division_id = $('#division').val();
+            var url = "{{ route('district') }}";
+
+            $.ajax({
+                type: "post",
+                url: url,
+                data: {
+                    'division_id': division_id
+                },
+                success: function(data) {
+                    $('#district').html(data);
+                    $('#sub_district').html('');
+                }
+            });
+        })
+
+        $('#district').change(function() {
+            var district_id = $('#district').val();
+            var url = "{{ route('sub_district') }}";
+
+            $.ajax({
+                type: "post",
+                url: url,
+                data: {
+                    'district_id': district_id
+                },
+                success: function(data) {
+                    $('#sub_district').html(data);
+                }
+            });
+        })
         //delivery charge--
         $('#inside_dhaka').click(function() {
             var total = parseFloat($('#total').val());

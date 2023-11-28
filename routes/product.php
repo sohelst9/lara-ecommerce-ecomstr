@@ -23,5 +23,9 @@ Route::get('/cart/remove/{item}', [CartController::class, 'remove_cart']);
 Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/district', [CheckoutController::class, 'district'])->name('district');
+Route::post('/sub_district', [CheckoutController::class, 'sub_district'])->name('sub_district');
+Route::post('/order', [CheckoutController::class, 'order'])->name('order');
+Route::get('/order-success', [CheckoutController::class, 'order_success'])->name('order.confirm.msg');
 // Route::middleware(['auth'])->group(function () {
 // });
