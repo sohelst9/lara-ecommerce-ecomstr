@@ -157,10 +157,7 @@
                                         <i class="fa-regular fa-heart"></i>
                                     </a>
                                 </div>
-                                <div class="buy-it-now-btn mt-2">
-                                    <a href="#" class="position-relative btn-atc btn-buyit-now">BUY IT
-                                        NOW</a>
-                                </div>
+                                
                                 <div class="share-area mt-4 d-flex align-items-center">
                                     <strong class="label mb-1 d-block">Share:</strong>
                                     <ul class="list-unstyled share-list d-flex align-items-center mb-1 flex-wrap">

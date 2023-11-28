@@ -23,6 +23,7 @@
                     <li class="nav-item"> <a class="nav-link" href="{{ route('category.index') }}">Category</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('color.index') }}">Color</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('size.index') }}">Size</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('coupon.index') }}">Coupon</a></li>
                 </ul>
             </div>
         </li>

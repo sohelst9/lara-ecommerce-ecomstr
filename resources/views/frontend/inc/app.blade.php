@@ -108,6 +108,29 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @yield('front_script')
         <script>
+            $(document).ready(function() {
+                // Delete item on button click
+                $('.delete-item').on('click', function() {
+                    if (confirm('Are You Sure Delete This Item?')) {
+                        var itemId = $(this).closest('.cart-item').data('item-id');
+                        $.ajax({
+                            url: '/cart/remove/' + itemId,
+                            type: 'GET',
+                            success: function(response) {
+                                if (response.success == true) {
+                                    // Remove the deleted item from the DOM
+                                    $('[data-item-id="' + itemId + '"]').remove();
+                                    alert(response.message)
+                                } else {
+                                    alert(response.error)
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
+        <script>
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -121,7 +144,7 @@
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 4000,
+                    timer: 3000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -141,7 +164,7 @@
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
-                    timer: 4000,
+                    timer: 3000,
                     timerProgressBar: true,
                     didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer)

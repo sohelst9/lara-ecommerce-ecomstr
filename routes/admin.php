@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ColorController;
+use App\Http\Controllers\Backend\CouponCodeController;
 use App\Http\Controllers\Backend\CustomerController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\LoginRegisterController;
@@ -40,6 +41,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
     Route::resource('/role', RoleController::class);
     Route::resource('/permission', PermissionController::class);
     Route::resource('/banner', BannerController::class);
+    Route::resource('/coupon', CouponCodeController::class);
     //---resource route //---mixed product related route end-------
      //----customer routes-----
      Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');

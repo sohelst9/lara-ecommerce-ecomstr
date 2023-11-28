@@ -9,6 +9,38 @@
     <meta name="keywords" content="E-COM-STR E-Commerce Website | Checkout" />
     <link rel="canonical" href="{{ url()->current() }}" />
     <title>E-COM-STR E-Commerce Website | Checkout</title>
+    <style>
+        .payment-options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .payment-options label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .payment-options input[type="radio"] {
+            display: none;
+        }
+
+        .payment-options img {
+            width: 100px;
+            height: 40px;
+            /* Adjust the size as needed */
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .payment-options input[type="radio"]:checked+img {
+            border-color: rgb(238, 85, 15);
+            /* Highlight the selected option */
+        }
+    </style>
 @endsection
 @section('main_content')
     <!-- breadcrumb start -->
@@ -31,4 +63,236 @@
         </div>
     </div>
     <!-- breadcrumb end -->
+
+    <main id="MainContent" class="content-for-layout">
+        <div class="checkout-page mt-100">
+            <div class="container">
+                <div class="checkout-page-wrapper">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+                                <div class="section-header mb-3">
+                                    <h2 class="section-heading">Check out</h2>
+                                </div>
+                                <div class="checkout-user-area overflow-hidden d-flex align-items-center">
+                                    <div class="checkout-user-img me-4">
+                                        @if (auth()->user()->image)
+                                            <img src="{{ asset(auth()->user()->image) }}" alt="img">
+                                        @else
+                                            <img src="{{ asset('image/default-image.webp') }}" alt="img">
+                                        @endif
+                                    </div>
+                                    <div class="checkout-user-details d-flex align-items-center justify-content-between w-100">
+                                        <div class="checkout-user-info">
+                                            <h2 class="checkout-user-name">{{ auth()->user()->name }}</h2>
+                                            <p class="checkout-user-address mb-0">{{ auth()->user()->phone }}</p>
+                                        </div>
+    
+                                        {{-- <a href="#" class="edit-user btn-secondary">EDIT PROFILE</a> --}}
+                                    </div>
+                                </div>
+    
+                                <div class="shipping-address-area">
+                                    <h2 class="shipping-address-heading pb-1">Shipping & Billing address</h2>
+                                    <div class="shipping-address-form-wrapper">
+                                        <div class="shipping-address-form common-form">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="name" class="label">Your Name <span class="text-danger">(*)</span></label>
+                                                        <input type="text" name="name" id="name"
+                                                            value="{{ auth()->user()->name }}" />
+                                                    </fieldset>
+                                                </div>
+    
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="email" class="label">Email address <span class="text-danger">(*)</span></label>
+                                                        <input type="email" name="email" id="email"
+                                                            value="{{ old('email') }}" />
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="phone" class="label">Phone number <span class="text-danger">(*)</span></label>
+                                                        <input type="text" name="phone" id="phone"
+                                                            value="{{ auth()->user()->phone }}" />
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="division" class="label">Division <span class="text-danger">(*)</span></label>
+                                                        <select class="form-select" name="division" id="division">
+                                                            <option selected="ca">Canada</option>
+                                                        </select>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="district" class="label">District <span class="text-danger">(*)</span></label>
+                                                        <select class="form-select" name="district" id="district">
+                                                        </select>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="sub_district" class="label">Sub District <span class="text-danger">(*)</span></label>
+                                                        <select class="form-select" name="district" id="district">
+                                                        </select>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="zip_code" class="label">Zip code</label>
+                                                        <input type="text" name="zip_code" id="zip_code"
+                                                            value="{{ old('zip_code') }}" />
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="address" class="label">Address <span class="text-danger">(*)</span></label>
+                                                        <input type="text" name="address" id="address"
+                                                            value="{{ old('address') }}">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-lg-6 col-md-12 col-12">
+                                                    <fieldset>
+                                                        <label for="order_note" class="label">Order Note</label>
+                                                        <input type="text" name="order_note" id="order_note"
+                                                            value="{{ old('order_note') }}">
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+                                <div class="cart-total-area checkout-summary-area">
+                                    <h3 class="d-none d-lg-block mb-0 text-center heading_24 mb-4">Order summary</h4>
+    
+                                        @foreach ($carts as $cart)
+                                            <div class="minicart-item d-flex">
+                                                <div class="mini-img-wrapper">
+                                                    <img class="mini-img" src="{{ asset($cart->product?->thumbnail) }}"
+                                                        alt="img">
+                                                </div>
+                                                <div class="product-info">
+                                                    <h2 class="product-title"><a>{{ $cart->product?->name }}</a>
+                                                    </h2>
+                                                    <p class="product-vendor">&#2547; {{ $cart->Product?->discount_price }} x
+                                                        {{ $cart->quantity }}</p>
+                                                    <p>{{ $cart->Size?->name }} /
+                                                        {{ $cart->Color?->name }}</p>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                        <div class="cart-total-box mt-4 bg-transparent p-0">
+                                            <div class="subtotal-item subtotal-box">
+                                                <h4 class="subtotal-title">Subtotals:</h4>
+                                                <p class="subtotal-value">&#2547;{{ session('subtotal') }}</p>
+                                            </div>
+                                            <div class="subtotal-item discount-box">
+                                                <h4 class="subtotal-title">Discount:</h4>
+                                                <p class="subtotal-value">{{ session('discount') }} %</p>
+                                            </div>
+    
+                                            <div class="mt-3">
+                                                <h6 class="">Delivery Charge :</h4>
+                                                    <div class="radio-group">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="delevery_charge" id="inside_dhaka" value="70">
+                                                            <label class="form-check-label" for="inside_dhaka">
+                                                                Inside dhaka - &#2547; 70
+                                                            </label>
+                                                        </div>
+    
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="delevery_charge" id="outside_dhaka" value="130">
+                                                            <label class="form-check-label" for="outside_dhaka">
+                                                                Outside dhaka - &#2547; 130
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <hr />
+                                            <div class="subtotal-item discount-box">
+                                                <h4 class="subtotal-title">Total:</h4>
+                                                <input type="hidden" id="total"
+                                                    name="total"value="{{ session('total') }}">
+                                                <p class="subtotal-value">&#2547;<span
+                                                        id="grand_total">{{ session('total') }}</p>
+                                            </div>
+                                        </div>
+    
+                                        <div class="payment-options">
+                                            <h6>Select payment Method :</h6>
+                                            <label>
+                                                <input type="radio" name="payment" value="stripe">
+                                                <img src="{{ asset('frontend/assets/img/payment/stripe.png') }}"
+                                                    alt="Stripe">
+                                            </label>
+    
+                                            <label>
+                                                <input type="radio" name="payment" value="bkash">
+                                                <img src="{{ asset('frontend/assets/img/payment/bikash.png') }}"
+                                                    alt="bKash">
+                                            </label>
+    
+                                            <label>
+                                                <input type="radio" name="payment" value="nagad">
+                                                <img src="{{ asset('frontend/assets/img/payment/nagad.png') }}"
+                                                    alt="Nagad">
+                                            </label>
+    
+                                            <label>
+                                                <input type="radio" name="payment" value="paypal">
+                                                <img src="{{ asset('frontend/assets/img/payment/paypal.png') }}"
+                                                    alt="PayPal">
+                                            </label>
+    
+                                            <label>
+                                                <input type="radio" name="payment" value="cash-on-delivery">
+                                                <img src="{{ asset('frontend/assets/img/payment/cash_one_delevery.png') }}"
+                                                    alt="Cash on Delivery">
+                                            </label>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shipping-address-area billing-area">
+                            <div class="minicart-btn-area d-flex align-items-center justify-content-between flex-wrap">
+                                <a href="{{ route('cart.index') }}"
+                                    class="checkout-page-btn minicart-btn btn-secondary">BACK TO
+                                    CART</a>
+                                <button type="submit" class="checkout-page-btn minicart-btn btn-primary">PLACE
+                                    ORDER</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+@endsection
+@section('front_script')
+    <script>
+        //delivery charge--
+        $('#inside_dhaka').click(function() {
+            var total = parseFloat($('#total').val());
+            var inside_value = parseFloat($('#inside_dhaka').val());
+            var g_total = total + inside_value;
+            $('#grand_total').html(g_total);
+        })
+
+        $('#outside_dhaka').click(function() {
+            var total = parseFloat($('#total').val());
+            var inside_value = parseFloat($('#outside_dhaka').val());
+            var g_total = total + inside_value;
+            $('#grand_total').html(g_total);
+        })
+    </script>
 @endsection
