@@ -116,7 +116,7 @@
                                                         <label for="email" class="label">Email address <span
                                                                 class="text-danger">(*)</span></label>
                                                         <input type="email" name="email" id="email"
-                                                            value="{{ old('email') }}" />
+                                                            value="{{ auth()->user()->email }}" />
                                                         @error('email')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
@@ -187,7 +187,7 @@
                                                         <label for="address" class="label">Address <span
                                                                 class="text-danger">(*)</span></label>
                                                         <input type="text" name="address" id="address"
-                                                            value="{{ old('address') }}">
+                                                            value="{{ auth()->user()->adderess }}">
                                                         @error('address')
                                                             <p class="text-danger">{{ $message }}</p>
                                                         @enderror
@@ -315,7 +315,7 @@
                                 <a href="{{ route('cart.index') }}"
                                     class="checkout-page-btn minicart-btn btn-secondary">BACK TO
                                     CART</a>
-                                <button type="submit" class="checkout-page-btn minicart-btn btn-primary">PLACE
+                                <button onclick="return confirm('Are you sure you want to order?')" type="submit" class="checkout-page-btn minicart-btn btn-primary">PLACE
                                     ORDER</button>
                             </div>
                         </div>

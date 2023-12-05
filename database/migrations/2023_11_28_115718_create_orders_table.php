@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('phone');
-            $table->tinyInteger('division_id');
-            $table->tinyInteger('district_id');
-            $table->tinyInteger('upazila_id');
+            $table->integer('division_id');
+            $table->integer('district_id');
+            $table->integer('upazila_id');
             $table->string('zip_code');
             $table->string('address');
             $table->string('order_note')->nullable();

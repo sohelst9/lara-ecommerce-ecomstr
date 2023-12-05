@@ -164,8 +164,8 @@
                                     id="profileImage">
                                 <div class="dropdown-content" id="profileDropdown">
                                     <a href="{{ route('customer.dashboard') }}">My Account</a>
-                                    <a href="#">My Orders</a>
-                                    <a href="#">Update Profile</a>
+                                    <a href="{{ route('customer.order.index') }}">My Orders</a>
+                                    <a href="{{ route('customer.profile.index') }}">Update Profile</a>
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <a href="#"

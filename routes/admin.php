@@ -47,4 +47,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
      Route::get('/customer', [CustomerController::class, 'index'])->name('admin.customer');
      //--sale routes-----
      Route::get('/orders', [OrderController::class, 'orders'])->name('admin.orders');
+     Route::get('/orders/payment/status/{id}', [OrderController::class, 'payment_status'])->name('payment.status.change');
+     Route::post('/orders/delivery/status', [OrderController::class, 'delivery_status'])->name('delivery.status.change');
+     Route::get('/order/invoice/{trnx_id}', [OrderController::class, 'invoice'])->name('order.invoice');
 });

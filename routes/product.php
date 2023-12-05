@@ -17,6 +17,7 @@ Route::get('/search/products', [ProductController::class, 'search'])->name('sear
 Route::get('/category/{slug}', [ProductController::class, 'category_based_product'])->name('category.product.show');
 
 Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+Route::post('/product/wishlist', [WishlistController::class, 'store_wishlist'])->name('wishlist.store');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/{coupon_code}', [CartController::class, 'index']);
 Route::get('/cart/remove/{item}', [CartController::class, 'remove_cart']);
@@ -26,6 +27,6 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/district', [CheckoutController::class, 'district'])->name('district');
 Route::post('/sub_district', [CheckoutController::class, 'sub_district'])->name('sub_district');
 Route::post('/order', [CheckoutController::class, 'order'])->name('order');
-Route::get('/order-success', [CheckoutController::class, 'order_success'])->name('order.confirm.msg');
+Route::get('/order-success', [CheckoutController::class, 'order_success'])->name('order.success');
 // Route::middleware(['auth'])->group(function () {
 // });

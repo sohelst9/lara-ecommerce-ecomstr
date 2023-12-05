@@ -65,12 +65,8 @@
                                             </div>
 
                                             <div class="product-card-action product-card-action-2 justify-content-center">
-                                                <a href="#" class="action-card action-wishlist">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </a>
-
-                                                <a href="#" class="action-card action-addtocart">
-                                                    <i class="fa-solid fa-bag-shopping"></i>
+                                                <a href="{{ route('single.product', $product->slug) }}" class="action-card action-addtocart">
+                                                    <i class="fa-solid fa-eye"></i>
                                                 </a>
                                             </div>
                                         </div>

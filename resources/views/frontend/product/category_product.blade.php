@@ -91,12 +91,8 @@
                                             </div>
 
                                             <div class="product-card-action product-card-action-2 justify-content-center">
-                                                <a href="#" class="action-card action-wishlist">
-                                                    <i class="fa-regular fa-heart"></i>
-                                                </a>
-
-                                                <a href="#" class="action-card action-addtocart">
-                                                    <i class="fa-solid fa-bag-shopping"></i>
+                                               <a href="{{ route('single.product', $product->slug) }}" class="action-card action-addtocart">
+                                                    <i class="fa-solid fa-eye"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -105,7 +101,7 @@
                                                 category : {{ $product->Category->title }}
                                             </ul>
                                             <h3 class="product-card-title">
-                                                <a href="{{ route('single.product', $product->slug) }}">{{ $product->name }}</a>
+                                                <a href="{{ route('single.product', $product->slug) }}">{{ Str::limit($product->name, 50) }}</a>
                                             </h3>
                                             <div class="product-card-price">
                                                 <span class="card-price-regular {{ $product->discount ? 'text-decoration-line-through' : '' }}">&#2547; {{ $product->price }}</span>

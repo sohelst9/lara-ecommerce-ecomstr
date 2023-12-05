@@ -100,7 +100,7 @@ class CheckoutController extends Controller
                 //delete all cart item
                 $cart_delete = Cart::where('user_id', $user_id);
                 $cart_delete->delete();
-                return redirect()->route('order.confirm.msg');
+                return redirect()->route('order.success');
             }
         }
     }
@@ -108,6 +108,6 @@ class CheckoutController extends Controller
     public function order_success()
     {
         $order = Order::where('user_id', auth()->user()->id)->latest()->first();
-        return 'Hello '. auth()->user()->name .'Your Order has been Successfully! Your Order Id '.$order->trnx_id.'You will be receiving an email shortly with confirmation of your order.';
+        return view('frontend.product.order_success', compact('order'));
     }
 }

@@ -95,7 +95,8 @@
                         @foreach ($common_categories as $category)
                             <div class="instagram-slick-item" data-aos="fade-up" data-aos-duration="700">
                                 <div class="instagram-card">
-                                    <a class="instagram-img-wrapper" href="{{ route('category.product.show', $category->slug) }}">
+                                    <a class="instagram-img-wrapper"
+                                        href="{{ route('category.product.show', $category->slug) }}">
                                         <span>{{ $category->title }}</span>
                                         <img src="{{ asset($category->image) }}" alt="{{ $category->title }}"
                                             class="instagram-card-img rounded" title="{{ $category->title }}">
@@ -215,4 +216,28 @@
         </div>
     </div>
     <!-- brand logo end -->
+@endsection
+
+@section('front_script')
+    <script>
+        $(document).ready(function() {
+            //----add wishlist product
+            $('.add_to_wishlist').click(function() {
+                const product_id = $(this).data('id');
+                const user_id = $(this).data('user');
+                $.ajax({
+                    type: 'POST',
+                    url: '/product/wishlist',
+                    data: {
+                        product_id: product_id,
+                        user_id: user_id
+                    },
+                    success: function(response) {
+                        alert(response);
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

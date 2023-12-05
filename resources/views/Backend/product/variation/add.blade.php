@@ -28,6 +28,9 @@
                                                 <option value="{{ $size->id }}">{{ $size->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('size_id')
+                                            <p class="text-info mt-2">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="color_id">Color</label>
@@ -37,6 +40,9 @@
                                                 <option value="{{ $color->id }}">{{ $color->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('color_id')
+                                            <p class="text-info mt-2">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="quantity">Quantity <span class="text-danger">(required)</span></label>

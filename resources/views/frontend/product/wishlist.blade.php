@@ -41,47 +41,102 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
-                            <div class="product-card">
-                                <div class="product-card-img">
-                                    <a class="hover-switch" href="collection-left-sidebar.html">
-                                        <img class="secondary-img" src="{{ asset('frontend/assets/img/products/furniture/9.jpg') }}"
-                                            alt="product-img">
-                                        <img class="primary-img" src="{{ asset('frontend/assets/img/products/furniture/1.jpg') }}"
-                                            alt="product-img">
-                                    </a>
-
-                                    <div class="product-badge">
-                                        <span class="badge-label badge-percentage rounded">-44%</span>
-                                    </div>
-
-                                    <div class="product-card-action product-card-action-2 justify-content-center">
-                                        <a href="#" class="action-card action-wishlist">
-                                            <i class="fa-regular fa-heart"></i>
+                        @foreach ($wishlists as $wishlist)
+                            <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-duration="700">
+                                <div class="product-card">
+                                    <div class="product-card-img">
+                                        <a class="hover-switch"
+                                            href="{{ route('single.product', $wishlist->Product?->slug) }}">
+                                            <img class="secondary-img" src="{{ asset($wishlist->Product?->thumbnail) }}"
+                                                alt="{{ $wishlist->Product?->name }}">
+                                            <img class="primary-img" src="{{ asset($wishlist->Product?->thumbnail) }}"
+                                                alt="{{ $wishlist->Product?->name }}">
                                         </a>
 
-                                        <a href="#" class="action-card action-addtocart">
-                                            <i class="fa-solid fa-bag-shopping"></i>
-                                        </a>
+                                        <div class="product-badge">
+                                            @if ($wishlist->Product?->discount)
+                                                <span
+                                                    class="badge-label badge-percentage rounded">{{ $wishlist->Product?->discount }}%</span>
+                                            @endif
+                                        </div>
+
+                                        <div class="product-card-action product-card-action-2 justify-content-center">
+                                            @auth('web')
+                                                @php
+                                                    $wishlistProduct = App\Models\Frontend\Wishlist::where('user_id', auth()->user()->id)
+                                                        ->where('product_id', $wishlist->product_id)
+                                                        ->first();
+                                                @endphp
+                                                @if ($wishlistProduct)
+                                                    <span class="add_to_wishlist action-card action-wishlist"
+                                                        data-user="{{ auth()->user()->id }}"
+                                                        data-id="{{ $wishlist->product_id }}" title="Wishlist Product Remove">
+                                                        <i class="fa-solid fa-heart"></i>
+                                                    </span>
+                                                @else
+                                                    <span class="add_to_wishlist action-card action-wishlist"
+                                                        data-user="{{ auth()->user()->id }}"
+                                                        data-id="{{ $wishlist->product_id }}">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </span>
+                                                @endif
+                                            @else
+                                                <a href="{{ route('login') }}" class="action-card action-wishlist">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </a>
+                                            @endauth
+
+                                            <a href="{{ route('single.product', $wishlist->Product?->slug) }}"
+                                                class="action-card action-addtocart">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="product-card-details">
-                                    <ul class="color-lists list-unstyled d-flex align-items-center">
-                                        <li>category : lofere</li>
-                                    </ul>
-                                    <h3 class="product-card-title">
-                                        <a href="">best wood furniture</a>
-                                    </h3>
-                                    <div class="product-card-price">
-                                        <span class="card-price-regular">$1529</span>
-                                        <span class="card-price-compare text-decoration-line-through">$1759</span>
+                                    <div class="product-card-details">
+                                        <h3 class="product-card-title">
+                                            <a
+                                                href="{{ route('single.product', $wishlist->Product?->slug) }}">{{ Str::limit($wishlist->Product?->name, 50) }}</a>
+                                        </h3>
+                                        <div class="product-card-price">
+                                            <span
+                                                class="card-price-regular {{ $wishlist->Product?->discount ? 'text-decoration-line-through' : '' }}">&#2547;
+                                                {{ $wishlist->Product?->price }}</span>
+                                            @if ($wishlist->Product?->discount)
+                                                <span class="card-price-compare">&#2547;
+                                                    {{ $wishlist->Product?->discount_price }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </main>
+@endsection
+
+@section('front_script')
+    <script>
+        $(document).ready(function() {
+            //----add wishlist product
+            $('.add_to_wishlist').click(function() {
+                const product_id = $(this).data('id');
+                const user_id = $(this).data('user');
+                $.ajax({
+                    type: 'POST',
+                    url: '/product/wishlist',
+                    data: {
+                        product_id: product_id,
+                        user_id: user_id
+                    },
+                    success: function(response) {
+                        alert(response);
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

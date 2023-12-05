@@ -22,6 +22,8 @@ class ProductVariationController extends Controller
     {
         // return $request->all();
         $request->validate([
+            'color_id' => 'required',
+            'size_id' => 'required',
             'quantity' => 'required'
         ]);
 

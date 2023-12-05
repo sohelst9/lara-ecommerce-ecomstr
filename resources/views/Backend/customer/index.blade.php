@@ -30,7 +30,7 @@
                                             <td>
                                                 <img src="{{ asset($customer->image) }}" width="60" height="60">
                                             </td>
-                                            <td>3</td>
+                                            <td>{{ $customer->Order->count() }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

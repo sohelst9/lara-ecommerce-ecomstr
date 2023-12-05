@@ -26,18 +26,40 @@
                                 </div>
 
                                 <div class="product-card-action product-card-action-2 justify-content-center">
-                                    <a href="#" class="action-card action-wishlist">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </a>
+                                    @auth('web')
+                                        @php
+                                            $wishlistProduct = App\Models\Frontend\Wishlist::where('user_id', auth()->user()->id)
+                                                ->where('product_id', $popular_product->id)
+                                                ->first();
+                                        @endphp
+                                        @if ($wishlistProduct)
+                                            <span class="add_to_wishlist action-card action-wishlist"
+                                                data-user="{{ auth()->user()->id }}"
+                                                data-id="{{ $popular_product->id }}" title="Wishlist Product Remove">
+                                                <i class="fa-solid fa-heart"></i>
+                                            </span>
+                                        @else
+                                            <span class="add_to_wishlist action-card action-wishlist"
+                                                data-user="{{ auth()->user()->id }}"
+                                                data-id="{{ $popular_product->id }}" title="Wishlist Product Add">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </span>
+                                        @endif
+                                    @else
+                                        <a href="{{ route('login') }}" class="action-card action-wishlist">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </a>
+                                    @endauth
 
-                                    <a href="#" class="action-card action-addtocart">
-                                        <i class="fa-solid fa-bag-shopping"></i>
+                                    <a href="{{ route('single.product', $popular_product->slug) }}"
+                                        class="action-card action-addtocart">
+                                        <i class="fa-solid fa-eye"></i>
                                     </a>
                                 </div>
                             </div>
                             <div class="product-card-details">
                                 <h3 class="product-card-title">
-                                    <a href="{{ route('single.product', $popular_product->slug) }}">{{ $popular_product->name }}</a>
+                                    <a href="{{ route('single.product', $popular_product->slug) }}">{{ Str::limit($popular_product->name, 50) }}</a>
                                 </h3>
                                 <div class="product-card-price">
                                     <span class="card-price-regular {{ $popular_product->discount ? 'text-decoration-line-through' : '' }}">&#2547; {{ $popular_product->price }}</span>

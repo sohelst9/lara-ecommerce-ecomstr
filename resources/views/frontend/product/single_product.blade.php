@@ -115,7 +115,7 @@
                                         <select name="color_id" id="color_id">
                                             <option value="">select</option>
                                             @foreach ($products_colors as $color)
-                                                <option value="{{ $color->Color->id }}">{{ $color->Color->name }}</option>
+                                                <option value="{{ $color->Color?->id }}">{{ $color->Color?->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -151,11 +151,6 @@
                                         <a href="{{ route('login') }}" class="position-relative btn-atc btn-add-to-cart loader">ADD TO
                                             CART</a>
                                     @endauth
-
-
-                                    <a href="" class="product-wishlist">
-                                        <i class="fa-regular fa-heart"></i>
-                                    </a>
                                 </div>
                                 
                                 <div class="share-area mt-4 d-flex align-items-center">
@@ -300,7 +295,6 @@
                                         <div class="product-card-action product-card-action-2">
                                             <a href="{{ route('single.product', $randomProduct->slug) }}"
                                                 class="addtocart-btn btn-primary">View Details</a>
-                                            <a href="#" class="addtocart-btn btn-primary">ADD TO CART</a>
                                         </div>
                                     </div>
                                     <div class="product-card-details text-center">

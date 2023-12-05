@@ -96,7 +96,7 @@ Version: 1.0.1
   width: 180px;
 }
 .profile-inf-right{
-  padding: 50px;
+  padding: 30px;
 }
 .profile-inf-right h4{
   margin-top: 0;
@@ -105,9 +105,131 @@ Version: 1.0.1
   line-height: 1.3;
   color: #191d28;
 }
+.profile-achievements {
+  gap: 32px;
+}
+.achievement-box .icon {
+  width: 56px;
+  height: 56px;
+  background-color: #e3fff1;
+}
+.account-nav-menu li {
+  border-top: 1px solid rgba(233,233,233,.4);
+}
+.account-nav-menu li a svg path {
+  fill: #6eb356;
+}
+.account-nav-menu li a {
+  display: block;
+  padding: 8px 24px;
+  color: #5d6374;
+}
+.order-history-table tr th, .order-history-table tr td {
+  padding: 8px 24px;
+}
+#progress-bar {
+  display: table;
+  width: 100%;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  table-layout: fixed;
+  padding: 0;
+  counter-reset: step;
+}
+#progress-bar li.tt-step {
+  list-style-type: none;
+  display: table-cell;
+  width: 25%;
+  float: left;
+  position: relative;
+  text-align: center;
+}
+#progress-bar li.tt-step.tt-step-done {
+  color: #22c55e;
+}
+#progress-bar li.tt-step:before {
+  width: 30px;
+  height: 30px;
+  color: #5d6374;
+  content: counter(step);
+  counter-increment: step;
+  line-height: 30px;
+  font-size: 14px;
+  border: 1px solid #f4f4f4;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: #fff;
+}
+#progress-bar li.tt-step.tt-step-done+li:after {
+  background-color: #22c55e;
+}
+#progress-bar li.tt-step.tt-step-done::before {
+  background-color: rgb(34, 197, 94);
+  color: rgb(255, 255, 255);
+  content: "";
+  font-family: FontAwesome;
+  border-color: rgb(34, 197, 94);
+}
+
+/* table column width fixed */
+
 /* customer dashboard end */
 
+/* profile image upload design and others field */
+.image-upload {
+  text-align: center;
+}
+
+.image-upload-label {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.image-preview {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 15px;
+  background-color: #f0f0f0;
+}
+
+#image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-upload-text {
+  display: block;
+  font-size: 16px;
+}
+
+#upload {
+  display: none;
+}
+.text_change_password{
+  font-size: 18px;
+  color: rgb(29, 28, 28);
+}
+/* profile image upload design others field */
+
+.action-wishlist i {
+  font-size: 23px;
+  color: #fe5700;
+}
+.action-addtocart i {
+  font-size: 23px;
+  color: #a100fe;
+}
+
 /* add new items  end */
+
+/* old csss code */
 
 iframe {
   width: 100%;
@@ -5168,3 +5290,4 @@ blockquote {
     margin-bottom: 15px;
   }
 }
+/* end old css code */

@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 
 class CouponCodeController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:view-coupon|create-coupon|edit-coupon|delete-coupon', ['only' => ['index', 'store']]);
+        $this->middleware('permission:create-coupon', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit-coupon', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-coupon', ['only' => ['delete']]);
+        $this->middleware('permission:show-coupon', ['only' => ['index', 'show']]);
+        $this->middleware('preventBackHistory');
+    }
     public function index()
     {
         $coupons = Coupon::latest()->get();
@@ -36,11 +45,11 @@ class CouponCodeController extends Controller
 
     public function show(Coupon $coupon)
     {
-        if($coupon->status == 0){
+        if ($coupon->status == 0) {
             $coupon->status = 1;
             $coupon->save();
             return redirect()->route('coupon.index')->with('success', 'Coupon Status Active !');
-        }else{
+        } else {
             $coupon->status = 0;
             $coupon->save();
             return redirect()->route('coupon.index')->with('success', 'Coupon Status Deactive !');
