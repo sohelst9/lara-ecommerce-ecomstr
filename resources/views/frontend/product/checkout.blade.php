@@ -274,7 +274,7 @@
 
                                         <div class="payment-options">
                                             <h6>Select payment Method :</h6>
-                                            <label>
+                                            {{-- <label>
                                                 <input type="radio" name="payment_type" value="stripe">
                                                 <img src="{{ asset('frontend/assets/img/payment/stripe.png') }}"
                                                     alt="Stripe">
@@ -296,7 +296,7 @@
                                                 <input type="radio" name="payment_type" value="paypal">
                                                 <img src="{{ asset('frontend/assets/img/payment/paypal.png') }}"
                                                     alt="PayPal">
-                                            </label>
+                                            </label> --}}
 
                                             <label>
                                                 <input type="radio" name="payment_type" value="cash_on_delivery">
